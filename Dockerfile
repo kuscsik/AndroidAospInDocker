@@ -3,7 +3,6 @@ FROM ubuntu:14.04
 ENV http_proxy ${http_proxy:-}
 ENV https_proxy ${https_proxy:-}
 ENV no_proxy ${no_proxy:-}
-ENV OUT_DIR_COMMON_BASE /temp/out/dist
 ENV USER root
 
 RUN apt-get -qq update
@@ -41,9 +40,5 @@ RUN echo "export USE_CCACHE=1" >> /etc/profile.d/android
 ENV USE_CCACHE 1
 ENV CCACHE_DIR /ccache
 
-COPY build.sh /script/build.sh
-RUN chmod 755 /script/build.sh
-
 WORKDIR /android-repo
 
-CMD ["/usr/local/bin/dumb-init", "--", "/script/build.sh"]
